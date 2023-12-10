@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34003.232
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataReader", "DataReader\DataReader.csproj", "{06E4D3C3-42C9-4B88-82E8-0A8FDF6A0C3F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataReaderConsole", "DataReaderConsole\DataReaderConsole.csproj", "{0B671048-E788-40AD-9492-3A989B664500}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{06E4D3C3-42C9-4B88-82E8-0A8FDF6A0C3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06E4D3C3-42C9-4B88-82E8-0A8FDF6A0C3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06E4D3C3-42C9-4B88-82E8-0A8FDF6A0C3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06E4D3C3-42C9-4B88-82E8-0A8FDF6A0C3F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B671048-E788-40AD-9492-3A989B664500}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B671048-E788-40AD-9492-3A989B664500}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B671048-E788-40AD-9492-3A989B664500}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B671048-E788-40AD-9492-3A989B664500}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8B851871-EA17-49EB-85D3-350715DF2693}
+	EndGlobalSection
+EndGlobal
