@@ -1,4 +1,6 @@
 ﻿using DataReader.Services;
+
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DataReader.Controllers
