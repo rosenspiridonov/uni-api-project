@@ -1,5 +1,6 @@
 ﻿using DataReader.Models;
 using DataReader.Services.DataService;
+using DataReader.Services.OrganizationService;
 
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,17 +14,17 @@ namespace DataReader.Controllers
          * - Services - CRUD
          * - Generate JSON file daily - Cron job
         */
-        private readonly IDataService _dataService;
+        private readonly IOrganizationService _organizationService;
 
-        public DataController(IDataService dataService)
+        public DataController(IOrganizationService organizationService)
         {
-            _dataService = dataService;
+            _organizationService = organizationService;
         }
 
         [HttpPost("upload")]
         public async Task<IActionResult> UploadAsync([FromBody] List<OrganizationModel> data)
         {
-            var succeeded = await _dataService.UploadAsync(data);
+            var succeeded = await _organizationService.UploadAsync(data);
             if (!succeeded)
             {
                 return BadRequest();
