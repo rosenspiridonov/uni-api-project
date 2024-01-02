@@ -5,7 +5,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace DataReader.Services
+namespace DataReader.Services.AuthService
 {
     public class AuthService : IAuthService
     {

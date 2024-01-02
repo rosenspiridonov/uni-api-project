@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using DataReader.Data.Entities;
+
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataReader.Data
@@ -9,5 +11,9 @@ namespace DataReader.Data
             : base(options)
         {
         }
+
+        public DbSet<Organization> Organizations { get; set; }
+        public DbSet<Country> Countries { get; set; }
+        public DbSet<Industry> Industries { get; set; }
     }
 }

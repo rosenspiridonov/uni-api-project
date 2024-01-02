@@ -1,7 +1,9 @@
 using System.Text;
 
 using DataReader.Data;
-using DataReader.Services;
+using DataReader.Services.AuthService;
+using DataReader.Services.DataService;
+using DataReader.Services.OrganizationService;
 
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -55,6 +57,8 @@ builder.Services
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IOrganizationService, OrganizationService>();
+builder.Services.AddScoped<IDataService, DataService>();
 
 builder.Services.AddControllers();
 // Swagger configuration with Authorize button for JWT

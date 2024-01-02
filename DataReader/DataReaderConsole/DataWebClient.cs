@@ -8,12 +8,12 @@ namespace DataReaderConsole
 {
     public static class DataWebClient
     {
-        private const string _baseApiUrl = "http://localhost:23451";
+        private const string _baseApiUrl = "https://localhost:44346";
 
         public static async Task<bool> UploadRecords()
         {
-            string filePath = Path.Combine("data", "data.csv");
-            string url = _baseApiUrl + "/upload-records";
+            var filePath = Path.Combine("data", "data.csv");
+            var url = _baseApiUrl + "/data/upload";
 
             try
             {

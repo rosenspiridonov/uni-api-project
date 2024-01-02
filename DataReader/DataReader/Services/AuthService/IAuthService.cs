@@ -1,4 +1,4 @@
-﻿namespace DataReader.Services
+﻿namespace DataReader.Services.AuthService
 {
     public interface IAuthService
     {

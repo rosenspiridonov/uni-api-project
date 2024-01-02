@@ -1,6 +1,4 @@
-﻿using DataReader.Services;
-
-using Microsoft.AspNetCore.Authorization;
+﻿using DataReader.Services.AuthService;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DataReader.Controllers
@@ -18,28 +16,25 @@ namespace DataReader.Controllers
         public async Task<IActionResult> RegisterAsync(string username, string password)
         {
             var result = await _authService.RegisterAsync(username, password);
-            if (result)
-            {
-                return Ok("User registered successfully.");
-            }
-            else
+            if (!result)
             {
                 return BadRequest("Registration failed.");
             }
+
+            return Ok("User registered successfully.");
         }
 
         [HttpPost("login")]
         public async Task<IActionResult> LoginAsync(string username, string password)
         {
             var token = await _authService.LoginAsync(username, password);
-            if (!string.IsNullOrEmpty(token))
-            {
-                return Ok(new { Token = token });
-            }
-            else
+            if (string.IsNullOrEmpty(token))
             {
                 return Unauthorized("Invalid credentials.");
             }
+
+            return Ok(new { Token = token });
+
         }
     }
 }
