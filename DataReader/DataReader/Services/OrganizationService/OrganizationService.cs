@@ -18,6 +18,25 @@ namespace DataReader.Services.OrganizationService
             _context = context;
         }
 
+        public async Task<OrganizationModel> GetAsync(string id)
+        {
+            var model = await _context.Organizations
+                .Where(x => x.Id == id)
+                .Select(x => new OrganizationModel()
+                {
+                    Name = x.Name,
+                    Website = x.Website,
+                    Country = x.Country.Name,
+                    Description = x.Description,
+                    Founded = x.Founded,
+                    Industry = x.Industry.Name,
+                    NumberOfEmployees = x.NumberOfEmployees,
+                })
+                .SingleOrDefaultAsync();
+
+            return model;
+        }
+
         public async Task<bool> UploadAsync(List<OrganizationModel> model)
         {
             await PreloadDataAsync();

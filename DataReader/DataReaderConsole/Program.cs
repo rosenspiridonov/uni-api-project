@@ -2,7 +2,11 @@
 
 using DataReaderConsole;
 
-await DataWebClient.UploadRecords();
+//await DataWebClient.UploadRecords();
+
+var organization = await DataWebClient.GetDataAsync("4C119bee275d420");
+
+Console.WriteLine(organization.Name);
 
 //var sb = new StringBuilder();
 

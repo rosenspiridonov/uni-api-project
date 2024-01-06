@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DataReader.Controllers
 {
-    public class DataController : ApiController
+    public class OrganizationController : ApiController
     {
         /* TODO
          * - DB Entities
@@ -16,9 +16,22 @@ namespace DataReader.Controllers
         */
         private readonly IOrganizationService _organizationService;
 
-        public DataController(IOrganizationService organizationService)
+        public OrganizationController(IOrganizationService organizationService)
         {
             _organizationService = organizationService;
+        }
+
+        [HttpGet("{organizationId}")]
+        public async Task<IActionResult> GetAsync(string organizationId)
+        {
+            var model = await _organizationService.GetAsync(organizationId);
+
+            if (model is null)
+            {
+                return NotFound();
+            }
+
+            return Ok(model);
         }
 
         [HttpPost("upload")]
