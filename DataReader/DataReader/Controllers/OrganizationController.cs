@@ -1,19 +1,13 @@
 ﻿using DataReader.Models;
-using DataReader.Services.DataService;
 using DataReader.Services.OrganizationService;
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DataReader.Controllers
 {
     public class OrganizationController : ApiController
     {
-        /* TODO
-         * - DB Entities
-         * - Endpoints for the data - CRUD
-         * - Services - CRUD
-         * - Generate JSON file daily - Cron job
-        */
         private readonly IOrganizationService _organizationService;
 
         public OrganizationController(IOrganizationService organizationService)
@@ -22,10 +16,10 @@ namespace DataReader.Controllers
         }
 
         [HttpGet("{organizationId}")]
+        [Authorize]
         public async Task<IActionResult> GetAsync(string organizationId)
         {
             var model = await _organizationService.GetAsync(organizationId);
-
             if (model is null)
             {
                 return NotFound();
@@ -35,12 +29,26 @@ namespace DataReader.Controllers
         }
 
         [HttpPost("upload")]
+        [Authorize]
         public async Task<IActionResult> UploadAsync([FromBody] List<OrganizationModel> data)
         {
             var succeeded = await _organizationService.UploadAsync(data);
             if (!succeeded)
             {
                 return BadRequest();
+            }
+
+            return Ok();
+        }
+
+        [HttpDelete("{organizationId}")]
+        [Authorize]
+        public async Task<IActionResult> DeleteAsync(string organizationId)
+        {
+            var succeeded = await _organizationService.DeleteAsync(organizationId);
+            if (!succeeded)
+            {
+                return NotFound();
             }
 
             return Ok();

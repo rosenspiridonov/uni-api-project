@@ -1,4 +1,5 @@
-﻿using DataReader.Services.AuthService;
+﻿using DataReader.Models;
+using DataReader.Services.AuthService;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DataReader.Controllers
@@ -25,9 +26,9 @@ namespace DataReader.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> LoginAsync(string username, string password)
+        public async Task<IActionResult> LoginAsync([FromBody] LoginModel model)
         {
-            var token = await _authService.LoginAsync(username, password);
+            var token = await _authService.LoginAsync(model.Username, model.Password);
             if (string.IsNullOrEmpty(token))
             {
                 return Unauthorized("Invalid credentials.");

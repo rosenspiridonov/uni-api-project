@@ -21,7 +21,7 @@ namespace DataReader.Services.OrganizationService
         public async Task<OrganizationModel> GetAsync(string id)
         {
             var model = await _context.Organizations
-                .Where(x => x.Id == id)
+                .Where(x => x.Id == id && !x.IsDeleted)
                 .Select(x => new OrganizationModel()
                 {
                     Name = x.Name,
@@ -73,6 +73,20 @@ namespace DataReader.Services.OrganizationService
             return result > 0;
         }
 
+        public async Task<bool> DeleteAsync(string id)
+        {
+            var entity = await _context.Organizations.FindAsync(id);
+            if (entity is null)
+            {
+                return false;
+            }
+
+            entity.IsDeleted = true;
+            await _context.SaveChangesAsync();
+
+            return true;
+        }
+
         private async Task PreloadDataAsync()
         {
             _preloadedCountries = await _context.Countries.ToListAsync();
@@ -108,9 +122,5 @@ namespace DataReader.Services.OrganizationService
 
             entity.Industry = industry;
         }
-
-        private async Task<Country> GetCountryAsync(string name) => await _context.Countries.FirstOrDefaultAsync(x => x.Name == name);
-
-        private async Task<Industry> GetIndustryAsync(string name) => await _context.Industries.FirstOrDefaultAsync(x => x.Name == name);
     }
 }

@@ -7,5 +7,7 @@ namespace DataReader.Services.OrganizationService
         Task<OrganizationModel> GetAsync(string id);
 
         Task<bool> UploadAsync(List<OrganizationModel> model);
+
+        Task<bool> DeleteAsync(string id);
     }
 }

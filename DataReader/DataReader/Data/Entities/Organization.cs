@@ -24,5 +24,7 @@ namespace DataReader.Data.Entities
         public int IndustryId { get; set; }
 
         public int NumberOfEmployees { get; set; }
+
+        public bool IsDeleted { get; set; } = false;
     }
 }
