@@ -1,6 +1,7 @@
 using System.Text;
 
 using DataReader.Data;
+using DataReader.Infrastructure.Extensions;
 using DataReader.Services.AuthService;
 using DataReader.Services.DataService;
 using DataReader.Services.OrganizationService;
@@ -9,6 +10,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 
@@ -108,14 +110,15 @@ else
     app.UseHsts();
 }
 
-// TODO: Allow only localhost
 app.UseCors(options => options
-                .AllowAnyHeader()
-                .AllowAnyMethod()
-                .AllowAnyOrigin()); 
+    .AllowAnyHeader()
+    .AllowAnyMethod()
+    .AllowAnyOrigin()); 
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+
+app.UseIPFilter("127.0.0.1");
 
 app.UseRouting();
 
