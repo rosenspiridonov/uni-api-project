@@ -80,5 +80,4 @@ static async Task DeleteRecord()
     Console.Write("Enter OrganizationId: ");
     var organizationId = Console.ReadLine();
     await DataWebClient.DeleteOrganizationAsync(organizationId);
-    Console.WriteLine("Record deleted.");
 }

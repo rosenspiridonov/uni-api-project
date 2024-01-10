@@ -4,6 +4,8 @@ using DataReader.Services.OrganizationService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
+using static DataReader.Constants;
+
 namespace DataReader.Controllers
 {
     public class OrganizationController : ApiController
@@ -42,7 +44,7 @@ namespace DataReader.Controllers
         }
 
         [HttpDelete("{organizationId}")]
-        [Authorize]
+        [Authorize(Roles = Roles.Admin)]
         public async Task<IActionResult> DeleteAsync(string organizationId)
         {
             var succeeded = await _organizationService.DeleteAsync(organizationId);
