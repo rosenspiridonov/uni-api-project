@@ -31,6 +31,36 @@ namespace DataReaderConsole
             }
         }
 
+        public static async Task<List<Organization>> GetTop3OrganizationsAsync()
+        {
+            var url = _baseApiUrl + "/organization/top-3";
+
+            try
+            {
+                var organization = await _client.GetFromJsonAsync<List<Organization>>(url);
+                return organization;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public static async Task<List<IndustryEmployeesModel>> GetIndustryEmployees()
+        {
+            var url = _baseApiUrl + "/organization/industry-employees";
+
+            try
+            {
+                var organization = await _client.GetFromJsonAsync<List<IndustryEmployeesModel>>(url);
+                return organization;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
         public static async Task<bool> UploadRecords()
         {
             var filePath = Path.Combine("data", "data.csv");

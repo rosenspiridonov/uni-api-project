@@ -30,6 +30,31 @@ namespace DataReader.Controllers
             return Ok(model);
         }
 
+        [HttpGet("top-3")]
+        public async Task<IActionResult> GetTop3()
+        {
+            var model = await _organizationService.GetTop3BiggestOrganizations();
+            if (model is null)
+            {
+                return NotFound();
+            }
+
+            return Ok(model);
+        }
+
+        [HttpGet("industry-employees")]
+        [Authorize]
+        public async Task<IActionResult> GetIndustryEmployees()
+        {
+            var model = await _organizationService.GetNumberOfEmployeesForEachIndustry();
+            if (model is null)
+            {
+                return NotFound();
+            }
+
+            return Ok(model);
+        }
+
         [HttpPost("upload")]
         [Authorize]
         public async Task<IActionResult> UploadAsync([FromBody] List<OrganizationModel> data)

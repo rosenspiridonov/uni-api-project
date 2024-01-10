@@ -37,6 +37,46 @@ namespace DataReader.Services.OrganizationService
             return model;
         }
 
+        #region Stats
+
+        public async Task<IEnumerable<OrganizationModel>> GetTop3BiggestOrganizations()
+        {
+            var model = await _context.Organizations
+                .Where(x => !x.IsDeleted)
+                .Select(x => new OrganizationModel()
+                {
+                    Name = x.Name,
+                    Website = x.Website,
+                    Country = x.Country.Name,
+                    Description = x.Description,
+                    Founded = x.Founded,
+                    Industry = x.Industry.Name,
+                    NumberOfEmployees = x.NumberOfEmployees,
+                })
+                .OrderByDescending(x => x.NumberOfEmployees)
+                .Take(3)
+                .ToListAsync();
+
+            return model;
+        }
+
+        public async Task<IEnumerable<IndustryEmployeesModel>> GetNumberOfEmployeesForEachIndustry()
+        {
+            var model = await _context.Organizations
+                .Where(x => !x.IsDeleted)
+                .GroupBy(x => x.Industry.Name)
+                .Select(g => new IndustryEmployeesModel
+                {
+                    Industry = g.Key,
+                    NumberOfEmployees = g.Sum(o => o.NumberOfEmployees),
+                })
+                .ToListAsync();
+
+            return model;
+        }
+
+        #endregion
+
         public async Task<bool> UploadAsync(List<OrganizationModel> model)
         {
             await PreloadDataAsync();

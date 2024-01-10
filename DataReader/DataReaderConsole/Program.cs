@@ -11,8 +11,10 @@ sb.AppendLine("Choose operation:");
 sb.AppendLine("1. Authenticate");
 sb.AppendLine("2. Upload records from file");
 sb.AppendLine("3. Get record");
-sb.AppendLine("4. Delete record");
-sb.AppendLine("5. Close");
+sb.AppendLine("4. Get top 3 biggest organizations");
+sb.AppendLine("5. Get number of employees for each industry");
+sb.AppendLine("6. Delete record");
+sb.AppendLine("7. Close");
 
 while (running)
 {
@@ -32,9 +34,15 @@ while (running)
             await GetRecord();
             break;
         case "4":
-            await DeleteRecord();
+            await GetTop3Organizations();
             break;
         case "5":
+            await GetIndustryEmployees();
+            break;
+        case "6":
+            await DeleteRecord();
+            break;
+        case "7":
             running = false;
             break;
         default:
@@ -72,6 +80,37 @@ static async Task GetRecord()
     else
     {
         Console.WriteLine("Organization not found.");
+    }
+}
+
+static async Task GetTop3Organizations()
+{
+    var result = await DataWebClient.GetTop3OrganizationsAsync();
+
+    if (result is null)
+    {
+        Console.WriteLine("Failed to get records.");
+        return;
+    }
+
+    foreach (var org in result)
+    {
+        Console.WriteLine(org.Name);
+    }
+}
+
+static async Task GetIndustryEmployees()
+{
+    var result = await DataWebClient.GetIndustryEmployees();
+    if (result is null)
+    {
+        Console.WriteLine("Failed to get records.");
+        return;
+    }
+
+    foreach (var industry in result)
+    {
+        Console.WriteLine(industry.Industry + " - Employees: " + industry.NumberOfEmployees);
     }
 }
 

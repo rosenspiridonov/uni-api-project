@@ -3,7 +3,6 @@ using System.Text;
 using DataReader.Data;
 using DataReader.Infrastructure.Extensions;
 using DataReader.Services.AuthService;
-using DataReader.Services.DataService;
 using DataReader.Services.OrganizationService;
 
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -65,7 +64,6 @@ builder.Services.AddAuthorization(options =>
 
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IOrganizationService, OrganizationService>();
-builder.Services.AddScoped<IDataService, DataService>();
 
 builder.Services.AddControllers();
 // Swagger configuration with Authorize button for JWT
@@ -120,7 +118,7 @@ if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
     app.UseSwagger();
-    app.UseSwaggerUI(c => c.SwaggerEndpoint("", "My API V1"));
+    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1"));
 }
 else
 {
